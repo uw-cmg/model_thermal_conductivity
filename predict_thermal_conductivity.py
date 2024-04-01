@@ -40,11 +40,11 @@ def get_preds_ebars_domains(df_test):
 
     return preds, ebars, domains
 
-def process_data(comp_list):
+def process_data(comp_list, temp_list):
     X = pd.DataFrame(np.empty((len(comp_list),)))
     y = pd.DataFrame(np.empty((len(comp_list),)))
 
-    df_test = pd.DataFrame({'Material composition': comp_list})
+    df_test = pd.DataFrame({'Material composition': comp_list, 'k_condition': temp_list})
 
     # Try this both ways depending on mastml version used.
     try:
@@ -60,10 +60,10 @@ def process_data(comp_list):
 
     return df_test
 
-def make_predictions(comp_list):
+def make_predictions(comp_list, temp_list):
 
     # Process data
-    df_test = process_data(comp_list)
+    df_test = process_data(comp_list, temp_list)
 
     # Get the ML predicted values
     preds, ebars, domains = get_preds_ebars_domains(df_test)
